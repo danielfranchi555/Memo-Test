@@ -28,7 +28,7 @@ export const MemoTest = () => {
     }
 
   const reset = ()=>{
-    setSelected([])
+    setSuccess([])
   }
 
  useEffect(()=>{
