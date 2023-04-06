@@ -1,4 +1,4 @@
-import { Grid, GridItem, Image, Stack } from '@chakra-ui/react'
+import { Button, Center, Grid, GridItem, Image, Stack, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
  
 const images = ['https://icongr.am/devicon/angularjs-original.svg?size=128&color=currentColor',
@@ -15,7 +15,6 @@ const images = ['https://icongr.am/devicon/angularjs-original.svg?size=128&color
 
 
 export const MemoTest = () => {
-
     const [success,setSuccess]=useState([])
     const [selected,setSelected]=useState([])
 
@@ -28,9 +27,11 @@ export const MemoTest = () => {
     
     }
 
-    console.log(success)
+  const reset = ()=>{
+    setSelected([])
+  }
 
-/ useEffect(()=>{
+ useEffect(()=>{
    if(selected.length === 2){
     if(selected[0].split("|")[1] === selected[1].split("|")[1]){
            setSuccess((success)=>success.concat(selected))
@@ -53,21 +54,28 @@ export const MemoTest = () => {
 
 
   return (
-    <Stack border='solid' justify='center' h='600px' align='center'>
-            <Grid templateColumns='repeat(4, 70px)' gap={1}>
+    <Stack  justify='center' h='600px' align='center' >
+        <Stack>
+            <Text color='Black' fontSize='40px'>Memo test</Text>
+        </Stack>
+            <Grid templateColumns='repeat(4, 70px)'  gap={1}>
          {images.map((item)=>{
               const [ ,url] = item.split("|")
             return(
-                <GridItem onClick={()=>handleClick(item)} key={item} p={1}>
+                <GridItem cursor='pointer'  onClick={()=>handleClick(item)} key={item} p={1}>
                   {selected.includes(item) || success.includes(item)?
-                  <Image  src={url} w={{base:'70px',md:'200px'}} alt="" /> 
+                  <Image  boxShadow='base' p='0' rounded='md' bg='white'  src={url} w={{base:'70px',md:'200px'}} alt="" /> 
                   :
-                  <img  key={item} src="https://icongr.am/clarity/ban.svg?size=108&color=currentColor" alt="" />
+                  <Image  boxShadow='base' p='5' rounded='md' bg='white'  key={item} src="https://icongr.am/clarity/cursor-hand-click.svg?size=100&color=currentColor" alt="" />
                   }
                     </GridItem>
             )
-         })}
+        })}
+         
   </Grid>
+  <Stack justify='center' align='center'>
+         <Button onClick={()=>reset()} w='200px'>Volver a Empezar</Button>
+         </Stack>
     </Stack>
 
   )
